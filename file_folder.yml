@@ -1,0 +1,11 @@
+---
+- hosts: all
+  name: creates files and folders
+  gather_facts: no
+  tasks:
+  - file:
+      path: /home/john/pliczek.txt
+      state: touch
+  - file:
+      path: /home/john/test_dir
+      state: directory

@@ -1,0 +1,6 @@
+---
+- hosts: all
+  become: true
+  name: installs packages
+  roles:
+  - setup-apache

@@ -1,0 +1,10 @@
+---
+- hosts: all
+  name: this playbook creates a USER
+  vars_files: 
+    - user.txt
+  become: true
+  tasks:
+  - user: 
+      name: "{{ user }}"
+    name: creating user {{ user }}

@@ -1,0 +1,10 @@
+---
+- hosts: webservers
+  name: copy file
+  become: true
+  tasks:
+  - name: copying an index file
+    copy:
+      src: ./index.html
+      dest: /var/www/html/
+    when: ansible_os_family == "RedHat"

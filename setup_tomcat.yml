@@ -1,0 +1,27 @@
+---
+- name: install tomcat
+  hosts: webservers
+  become: true
+  tasks:
+  - name: install java
+    yum:
+      name: java
+      state: installed
+    when: ansible_os_family == "RedHat"
+  - name: download tomcat
+    get_url: 
+      url: https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.73/bin/apache-tomcat-8.5.73.tar.gz
+      dest: /opt
+  - name: untar tomcat
+    unarchive:
+      src: /opt/apache-tomcat-8.5.73.tar.gz
+      dest: /opt
+      remote_src: yes
+  - name: add execution perm
+    file:
+      path: /opt/apache-tomcat-8.5.73/bin/startup.sh
+      mode: 0777
+  - name: start tomcat
+    shell: nohup ./startup.sh
+    args:
+      chdir: /opt/apache-tomcat-8.5.73/bin/

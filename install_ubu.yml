@@ -1,0 +1,14 @@
+---
+- hosts: webservers
+  become: true
+  name: installs packages
+  tasks:
+  - name: install apps
+    yum:
+#      name: ['git','gcc','wget','tree'] 
+      name: "{{ item }}"
+      state: installed
+    with_items:
+      - git  
+      - tree
+    when: ansible_os_family == "RedHat"
